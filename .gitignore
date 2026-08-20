@@ -23,6 +23,10 @@ db.sqlite3-journal
 Assignment1_Submission.html
 # Generated screenshots (already embedded in the submission PDF)
 screenshots/
+# Submission PDF (kept locally, submitted to LMS separately)
+Assignment1_Submission.pdf
+# Local helper scripts (not part of the project)
+rewrite_messages.sh
 
 # Editor / OS
 .vscode/
