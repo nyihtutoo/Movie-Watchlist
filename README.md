@@ -158,11 +158,11 @@ views (list, create, update, delete, toggle watched, search).
 
 ## AI usage disclosure
 In line with the course academic-integrity policy, I acknowledge that I used an AI
-assistant (Claude) to support my work on this assignment. I used it as a helper —
-for explanations of Django concepts, speeding up repetitive boilerplate, and help
-with debugging. I made the design decisions, reviewed and adapted the code, set up
-and tested the application myself, and I understand the code and can explain any
-part of it on request.
+assistant (Claude) to support my work on this assignment. I used it as a helper for
+explanations of Django concepts, speeding up repetitive boilerplate, and help with
+debugging. I made the design decisions, reviewed and adapted the code, set up and
+tested the application myself, and I understand the code and can explain any part of
+it on request.
 
 ## Author
 - **Student:** st126005@ait.asia
