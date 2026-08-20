@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.Python
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Django
+*.log
+db.sqlite3
+db.sqlite3-journal
+/staticfiles/
+/media/
+
+# Environment / secrets — never commit real credentials
+.env
+
+# Generated intermediate report (the PDF is the deliverable that we keep)
+Assignment1_Submission.html
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

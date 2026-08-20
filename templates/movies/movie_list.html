@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}My Movies · Movie Watchlist{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">My Movies</h1>
+    <span class="badge bg-secondary">{{ movies|length }} total</span>
+</div>
+
+<form method="get" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="q" value="{{ query }}"
+               class="form-control" placeholder="Search by title...">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+        {% if query %}
+            <a class="btn btn-outline-secondary" href="{% url 'movies:movie_list' %}">
+                Clear
+            </a>
+        {% endif %}
+    </div>
+</form>
+
+{% if movies %}
+<div class="table-responsive">
+    <table class="table table-hover align-middle bg-white shadow-sm rounded">
+        <thead class="table-dark">
+            <tr>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Year</th>
+                <th>Rating</th>
+                <th>Status</th>
+                <th>Date Added</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for movie in movies %}
+            <tr>
+                <td class="fw-semibold">{{ movie.title }}</td>
+                <td>{{ movie.genre|default:"—" }}</td>
+                <td>{{ movie.release_year|default:"—" }}</td>
+                <td>
+                    {% if movie.personal_rating %}
+                        {% for _ in "12345"|make_list %}{% if forloop.counter <= movie.personal_rating %}★{% else %}☆{% endif %}{% endfor %}
+                    {% else %}
+                        —
+                    {% endif %}
+                </td>
+                <td>
+                    {% if movie.watched %}
+                        <span class="badge bg-success">Watched</span>
+                    {% else %}
+                        <span class="badge bg-warning text-dark">Unwatched</span>
+                    {% endif %}
+                </td>
+                <td class="text-muted small">{{ movie.date_added|date:"d M Y, H:i" }}</td>
+                <td class="text-end">
+                    <form method="post"
+                          action="{% url 'movies:movie_toggle_watched' movie.pk %}"
+                          class="d-inline">
+                        {% csrf_token %}
+                        <button class="btn btn-sm btn-outline-success" type="submit"
+                                title="Toggle watched">
+                            {% if movie.watched %}↩ Unwatch{% else %}✓ Watch{% endif %}
+                        </button>
+                    </form>
+                    <a class="btn btn-sm btn-outline-primary"
+                       href="{% url 'movies:movie_update' movie.pk %}">Edit</a>
+                    <a class="btn btn-sm btn-outline-danger"
+                       href="{% url 'movies:movie_delete' movie.pk %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="text-center text-muted py-5 bg-white rounded shadow-sm">
+    {% if query %}
+        <p class="mb-1">No movies match “{{ query }}”.</p>
+        <a href="{% url 'movies:movie_list' %}">Show all movies</a>
+    {% else %}
+        <p class="mb-1">Your watchlist is empty.</p>
+        <a href="{% url 'movies:movie_create' %}">Add your first movie</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}
