@@ -21,6 +21,8 @@ db.sqlite3-journal
 
 # Generated intermediate report (the PDF is the deliverable that we keep)
 Assignment1_Submission.html
+# Generated screenshots (already embedded in the submission PDF)
+screenshots/
 
 # Editor / OS
 .vscode/
